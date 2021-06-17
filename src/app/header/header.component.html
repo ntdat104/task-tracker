@@ -1,0 +1,9 @@
+<header class="display-flex justify-content-sb align-items-center margin-bottom-20">
+  <h1 [ngStyle]="{ color: 'blue' }">{{ getTitle() }}</h1>
+  <app-button
+    *ngIf="hasRoute('/')"
+    (btnClick)="toggleAddTask()"
+    bgColor="{{ showAddTask ? 'red' : 'green' }}"
+    text="{{ showAddTask ? 'Close' : 'Add' }}"
+  ></app-button>
+</header>

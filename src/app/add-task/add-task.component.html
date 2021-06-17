@@ -1,0 +1,15 @@
+<form [formGroup]="formData" *ngIf="showAddTask" (ngSubmit)="onSubmit()" [ngStyle]="{ 'margin-bottom': '40px' }">
+  <div class="form-control">
+    <label for="text">Text</label>
+    <input type="text" id="text" formControlName="text" required />
+  </div>
+  <div class="form-control">
+    <label for="day">Day</label>
+    <input type="date" id="day" formControlName="day" required />
+  </div>
+  <div class="form-control form-control-check">
+    <label for="reminder">Reminder</label>
+    <input type="checkbox" id="reminder" formControlName="reminder" />
+  </div>
+  <input class="btn btn-block" type="submit" value="ADD Task" />
+</form>
