@@ -1,22 +1,23 @@
 import { Component, OnInit, Output, EventEmitter } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
-import { Validators } from "@angular/forms";
+
+//* form
+import { FormBuilder, Validators } from "@angular/forms";
+
+//* ỉnterface
 import { Task } from "../tasks/task.interface";
 
+//* services
 import { UiService } from "../ui.service";
-
-import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-add-task",
   templateUrl: "./add-task.component.html",
-  styleUrls: ["./add-task.component.css"],
+  styleUrls: [],
 })
 export class AddTaskComponent implements OnInit {
-  @Output() onAddTask: EventEmitter<Task> = new EventEmitter();
+  @Output() addTask: EventEmitter<Task> = new EventEmitter();
 
-  showAddTask: boolean = false;
-  subscription?: Subscription;
+  isShowAddTaskForm!: boolean;
 
   formData = this.formBuilder.group({
     text: ["", Validators.required],
@@ -24,24 +25,33 @@ export class AddTaskComponent implements OnInit {
     reminder: [false],
   });
 
-  constructor(private uiService: UiService, private formBuilder: FormBuilder) {
-    this.subscription = this.uiService.onToggle().subscribe((value) => (this.showAddTask = value));
+  constructor(private uiService: UiService, private formBuilder: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.getIsShowAddTaskForm();
   }
 
-  ngOnInit(): void {}
+  getIsShowAddTaskForm(): void {
+    const observer = {
+      next: (data: boolean) => (this.isShowAddTaskForm = data),
+      error: (err: any) => console.log(err),
+      complete: () => console.log("Done!"),
+    };
+    this.uiService.getIsShowAddTaskForm().subscribe(observer);
+  }
 
-  isFormValid(formData: FormGroup): boolean {
-    return formData.valid;
+  changeIsShowAddTaskForm(): void {
+    this.uiService.changeIsShowAddTaskForm();
   }
 
   onSubmit(): void {
-    if (this.isFormValid(this.formData)) {
+    if (this.formData.valid) {
       const newTask: Task = this.formData.value;
-      this.onAddTask.emit(newTask);
+      this.addTask.emit(newTask);
 
       this.formData.reset();
-      this.showAddTask = !this.showAddTask;
-      this.uiService.toggleAddTask();
+      this.getIsShowAddTaskForm();
+      this.changeIsShowAddTaskForm();
     } else alert("Form is invalid");
   }
 }

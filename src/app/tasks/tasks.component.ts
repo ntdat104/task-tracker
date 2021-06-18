@@ -1,21 +1,26 @@
-import { TaskService } from "./task.service";
 import { Component, OnInit } from "@angular/core";
+
+//* services
+import { TaskService } from "./task.service";
+
+//* interface
 import { Task } from "./task.interface";
 
 @Component({
   selector: "app-tasks",
   templateUrl: "./tasks.component.html",
-  styleUrls: ["./tasks.component.css"],
+  styleUrls: [],
 })
 export class TasksComponent implements OnInit {
-  tasks: Task[] = [];
+  tasks!: Task[];
+
   constructor(private taskService: TaskService) {}
 
   ngOnInit(): void {
     this.getTasks();
   }
 
-  getTasks() {
+  getTasks(): void {
     this.taskService.getTasks().subscribe({
       next: (tasks) => (this.tasks = tasks),
       error: (err) => console.log(err),
@@ -23,7 +28,7 @@ export class TasksComponent implements OnInit {
     });
   }
 
-  deleteTask(task: Task) {
+  deleteTask(task: Task): void {
     this.taskService.deleteTask(task).subscribe({
       next: () => this.getTasks(),
       error: (err) => console.log(err),
@@ -31,7 +36,7 @@ export class TasksComponent implements OnInit {
     });
   }
 
-  toggleReminder(task: Task) {
+  toggleReminder(task: Task): void {
     task.reminder = !task.reminder;
     this.taskService.updateTaskReminder(task).subscribe({
       next: () => this.getTasks(),
@@ -40,7 +45,7 @@ export class TasksComponent implements OnInit {
     });
   }
 
-  addTask(task: Task) {
+  addTask(task: Task): void {
     this.taskService.addTask(task).subscribe({
       next: () => this.getTasks(),
       error: (err) => console.log(err),

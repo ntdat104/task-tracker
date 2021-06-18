@@ -1,8 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 
+//* services
 import { UiService } from "../ui.service";
-
-import { Subscription } from "rxjs";
 
 import { Router } from "@angular/router";
 
@@ -12,26 +11,29 @@ import { Router } from "@angular/router";
   styleUrls: ["./header.component.css"],
 })
 export class HeaderComponent implements OnInit {
-  private title: string = "Task Tracker";
+  title: string = "Task Tracker";
+  isShowAddTaskForm!: boolean;
 
-  showAddTask: boolean = false;
-  subscription?: Subscription;
+  constructor(private uiService: UiService, private router: Router) {}
 
-  constructor(private uiService: UiService, private router: Router) {
-    this.subscription = this.uiService.onToggle().subscribe((value) => (this.showAddTask = value));
+  ngOnInit(): void {
+    this.getIsShowAddTaskForm();
   }
 
-  ngOnInit(): void {}
-
-  getTitle = (): string => {
-    return this.title;
-  };
-
-  toggleAddTask() {
-    this.uiService.toggleAddTask();
+  getIsShowAddTaskForm(): void {
+    const observer = {
+      next: (data: boolean) => (this.isShowAddTaskForm = data),
+      error: (err: any) => console.log(err),
+      complete: () => console.log("Done!"),
+    };
+    this.uiService.getIsShowAddTaskForm().subscribe(observer);
   }
 
-  hasRoute(route: string) {
+  changeIsShowAddTaskForm(): void {
+    this.uiService.changeIsShowAddTaskForm();
+  }
+
+  hasRoute(route: string): boolean {
     return this.router.url === route;
   }
 }

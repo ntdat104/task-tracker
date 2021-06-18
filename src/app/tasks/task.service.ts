@@ -1,17 +1,23 @@
 import { Injectable } from "@angular/core";
 
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+
+//* rxjs
 import { Observable } from "rxjs";
 
+//* interface
 import { Task } from "./task.interface";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+
+//* env
+import { environment } from "src/environments/environment";
 
 @Injectable({
   providedIn: "root",
 })
 export class TaskService {
-  private apiUrl: string = "http://localhost:4000/tasks";
+  private apiUrl: string = environment.API_URL;
 
-  httpOptions = {
+  private httpOptions = {
     headers: new HttpHeaders({
       "Content-Type": "application/json",
     }),
