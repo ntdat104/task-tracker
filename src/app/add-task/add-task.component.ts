@@ -1,13 +1,7 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
-
-//* form
+import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
-
-//* ỉnterface
-import { Task } from "../tasks/task.interface";
-
-//* services
-import { UiService } from "../ui.service";
+import { Task } from "../../types/task";
+import { UiService } from "../../services/ui.service";
 
 @Component({
   selector: "app-add-task",

@@ -1,14 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-
-//* services
-import { UiService } from "../ui.service";
-
 import { Router } from "@angular/router";
+import { UiService } from "../../services/ui.service";
 
 @Component({
   selector: "app-header",
   templateUrl: "./header.component.html",
-  styleUrls: ["./header.component.css"],
+  styleUrls: [],
 })
 export class HeaderComponent implements OnInit {
   title: string = "Task Tracker";

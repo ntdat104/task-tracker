@@ -1,21 +1,15 @@
-import { Injectable } from "@angular/core";
-
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-
-//* rxjs
+import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { Task } from "../types/task";
 
-//* interface
-import { Task } from "./task.interface";
-
-//* env
-import { environment } from "src/environments/environment";
+import { config } from "../configs";
 
 @Injectable({
   providedIn: "root",
 })
 export class TaskService {
-  private apiUrl: string = environment.API_URL;
+  private apiUrl: string = config.API_URL;
 
   private httpOptions = {
     headers: new HttpHeaders({

@@ -1,9 +1,0 @@
-<header class="display-flex justify-content-sb align-items-center margin-bottom-20">
-  <h1 [ngStyle]="{ color: 'blue' }">{{ title }}</h1>
-  <app-button
-    *ngIf="hasRoute('/')"
-    (btnClick)="changeIsShowAddTaskForm()"
-    [bgColor]="isShowAddTaskForm ? 'red' : 'green'"
-    [text]="isShowAddTaskForm ? 'Close' : 'Add'"
-  ></app-button>
-</header>
