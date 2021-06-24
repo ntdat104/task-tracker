@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
-import { Task } from "../../types/task";
-import { UiService } from "../../services/ui.service";
+import { Task } from "#types/task";
+import { UiService } from "#services/ui.service";
 
 @Component({
   selector: "app-add-task",

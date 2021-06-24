@@ -1,4 +1,4 @@
-import { environment } from "src/environments/environment";
+import { environment } from "#environments/environment";
 
 interface ConfigType {
   API_URL: string;
