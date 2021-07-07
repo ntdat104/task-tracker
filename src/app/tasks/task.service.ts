@@ -1,9 +1,8 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { config } from "configs/index";
 import { Observable } from "rxjs";
-import { Task } from "../types/task";
-
-import { config } from "../configs";
+import { Task } from "types/task";
 
 @Injectable({
   providedIn: "root",
