@@ -1,12 +1,10 @@
 import { Injectable } from "@angular/core";
-
-//* rxjs
 import { Observable, Subject } from "rxjs";
 
 @Injectable({
   providedIn: "root",
 })
-export class UiService {
+export class TaskUiService {
   private isShowAddTaskForm: boolean = false;
 
   private subject = new Subject<boolean>();

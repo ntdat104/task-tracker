@@ -1,14 +1,26 @@
-<form [formGroup]="formAdd" *ngIf="isShowAddTaskForm" (ngSubmit)="onSubmit()" [ngStyle]="{ 'margin-bottom': '40px' }">
+<form
+  [formGroup]="formAdd"
+  *ngIf="isShowAddTaskForm"
+  (ngSubmit)="onSubmit()"
+  [ngStyle]="{ 'margin-bottom': '40px' }"
+>
   <div class="form-control">
     <label for="text">Text</label>
     <input type="text" id="text" formControlName="text" required />
-    <p [style.color]="'red'" *ngIf="text.invalid && (text.dirty || text.touched)">Text is required</p>
+    <p
+      [style.color]="'red'"
+      *ngIf="text.invalid && (text.dirty || text.touched)"
+    >
+      Text is required
+    </p>
   </div>
 
   <div class="form-control">
     <label for="day">Day</label>
     <input type="date" id="day" formControlName="day" required />
-    <p [style.color]="'red'" *ngIf="day.invalid && (day.dirty || day.touched)">Day is required</p>
+    <p [style.color]="'red'" *ngIf="day.invalid && (day.dirty || day.touched)">
+      Day is required
+    </p>
   </div>
   <div class="form-control form-control-check">
     <label for="reminder">Reminder</label>

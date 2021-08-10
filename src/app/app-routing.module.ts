@@ -1,16 +1,18 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { TasksComponent } from "app/tasks/tasks.component";
-import { AboutComponent } from "components/about/about.component";
 
 const routes: Routes = [
   {
     path: "",
-    component: TasksComponent,
+    redirectTo: "task-tracker",
+    pathMatch: "full",
   },
   {
-    path: "about",
-    component: AboutComponent,
+    path: "task-tracker",
+    loadChildren: () =>
+      import("./task-tracker/task-tracker.module").then(
+        (m) => m.TaskTrackerModule,
+      ),
   },
 ];
 

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { UiService } from "services/ui.service";
-import { Task } from "types/task";
+import { Task } from "./../../models/task.model";
+import { TaskUiService } from "./../../services/task-ui.service";
 
 interface InitialProps {
   text: string;
@@ -10,11 +10,11 @@ interface InitialProps {
 }
 
 @Component({
-  selector: "app-add-task",
-  templateUrl: "./add-task.component.html",
-  styleUrls: [],
+  selector: "app-task-add-btn",
+  templateUrl: "./task-add-btn.component.html",
+  styleUrls: ["./task-add-btn.component.css"],
 })
-export class AddTaskComponent implements OnInit {
+export class TaskAddBtnComponent implements OnInit {
   @Output() addTask: EventEmitter<Task> = new EventEmitter();
 
   isShowAddTaskForm!: boolean;
@@ -26,7 +26,7 @@ export class AddTaskComponent implements OnInit {
     reminder: [false],
   });
 
-  constructor(private uiService: UiService, private fb: FormBuilder) {}
+  constructor(private taskUiService: TaskUiService, private fb: FormBuilder) {}
 
   /**
    * call getIsShowAddTaskForm and set initialValue from form-value
@@ -66,14 +66,14 @@ export class AddTaskComponent implements OnInit {
       error: (err: any) => console.log(err),
       complete: () => console.log("Done!"),
     };
-    this.uiService.getIsShowAddTaskForm().subscribe(observer);
+    this.taskUiService.getIsShowAddTaskForm().subscribe(observer);
   }
 
   /**
    * change variable isShowAddTaskForm from task.service
    */
   changeIsShowAddTaskForm(): void {
-    this.uiService.changeIsShowAddTaskForm();
+    this.taskUiService.changeIsShowAddTaskForm();
   }
 
   /**

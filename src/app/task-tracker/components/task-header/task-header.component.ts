@@ -1,17 +1,17 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { UiService } from "services/ui.service";
+import { TaskUiService } from "app/task-tracker/services/task-ui.service";
 
 @Component({
-  selector: "app-header",
-  templateUrl: "./header.component.html",
-  styleUrls: [],
+  selector: "app-task-header",
+  templateUrl: "./task-header.component.html",
+  styleUrls: ["./task-header.component.css"],
 })
-export class HeaderComponent implements OnInit {
+export class TaskHeaderComponent implements OnInit {
   title: string = "Task Tracker";
   isShowAddTaskForm!: boolean;
 
-  constructor(private uiService: UiService, private router: Router) {}
+  constructor(private taskUiService: TaskUiService, private router: Router) {}
 
   ngOnInit(): void {
     this.getIsShowAddTaskForm();
@@ -23,11 +23,11 @@ export class HeaderComponent implements OnInit {
       error: (err: any) => console.log(err),
       complete: () => console.log("Done!"),
     };
-    this.uiService.getIsShowAddTaskForm().subscribe(observer);
+    this.taskUiService.getIsShowAddTaskForm().subscribe(observer);
   }
 
   changeIsShowAddTaskForm(): void {
-    this.uiService.changeIsShowAddTaskForm();
+    this.taskUiService.changeIsShowAddTaskForm();
   }
 
   hasRoute(route: string): boolean {

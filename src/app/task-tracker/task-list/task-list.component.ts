@@ -1,13 +1,13 @@
 import { Component, OnInit } from "@angular/core";
-import { Task } from "types/task";
-import { TaskService } from "./task.service";
+import { Task } from "../models/task.model";
+import { TaskService } from "../services/task.service";
 
 @Component({
-  selector: "app-tasks",
-  templateUrl: "./tasks.component.html",
-  styleUrls: [],
+  selector: "app-task-list",
+  templateUrl: "./task-list.component.html",
+  styleUrls: ["./task-list.component.css"],
 })
-export class TasksComponent implements OnInit {
+export class TaskListComponent implements OnInit {
   tasks!: Task[];
 
   constructor(private taskService: TaskService) {}
