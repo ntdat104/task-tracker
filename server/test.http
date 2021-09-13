@@ -1,0 +1,30 @@
+@baseUrl = http://localhost:8080
+@api = tasks
+@id = 61343bf1fd69b0002fed3cee
+
+### @name getAll
+GET {{baseUrl}}/{{api}}
+
+### @name getByID
+GET {{baseUrl}}/{{api}}/{{id}}
+
+### @name createNew
+POST {{baseUrl}}/{{api}}
+Content-Type: application/json
+
+{
+    "text": "Do homeworks",
+    "day": "2000-04-10",
+    "reminder": false
+}
+
+### @name deleteByID
+DELETE {{baseUrl}}/{{api}}/{{id}}
+
+### @name updateByID
+PUT {{baseUrl}}/{{api}}/{{id}}
+Content-Type: application/json
+
+{
+    "time": 999
+}

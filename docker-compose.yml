@@ -1,0 +1,60 @@
+version: "3"
+
+networks:
+  task-tracker:
+
+volumes:
+  db-data:
+
+services:
+  client:
+    container_name: client
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    restart: always
+    hostname: client
+    ports:
+      - 4200:3000
+    volumes:
+      - ./client/:/app
+    environment:
+      MESSAGE: "Client is running"
+    networks:
+      - task-tracker
+    links:
+      - server
+    depends_on:
+      - server
+
+  server:
+    container_name: server
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    restart: always
+    hostname: server
+    ports:
+      - 8080:4000
+    volumes:
+      - ./server:/app
+    environment:
+      MESSAGE: "Server is running"
+    networks:
+      - task-tracker
+    links:
+      - mongo
+    depends_on:
+      - mongo
+
+  mongo:
+    container_name: mongodb
+    image: mongo
+    restart: always
+    hostname: mongodb
+    ports:
+      - 27017:27017
+    volumes:
+      - db-data:/data/db
+    networks:
+      - task-tracker

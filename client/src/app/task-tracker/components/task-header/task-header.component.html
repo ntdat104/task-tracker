@@ -1,0 +1,11 @@
+<header class="display-flex justify-content-sb align-items-center margin-bottom-20">
+  <h1 [ngStyle]="{ color: 'blue' }">{{ title }}</h1>
+  <button
+    *ngIf="hasRoute('/task-tracker/task-list')"
+    (click)="changeIsShowAddTaskForm()"
+    [style.background-color]="isShowAddTaskForm ? 'red' : 'green'"
+    class="btn"
+  >
+    {{ isShowAddTaskForm ? "Close" : ("Add" | uppercase) }}
+  </button>
+</header>
